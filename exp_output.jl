@@ -136,8 +136,10 @@ Wlog = tanh.(0.5*WN) .* Wdir
     for i = 1:size(Wlog,1)
         plot3D(Wlog[i,2,indt],Wlog[i,3,indt],Wlog[i,1,indt], color="k", linewidth=0.2) # tail
     end
-    plot3D(Wlog[1:div(m,2),2,k],Wlog[1:div(m,2),3,k],Wlog[1:div(m,2),1,k],"o",color="C3", markersize=1)
-    plot3D(Wlog[div(m,2)+1:end,2,k],Wlog[div(m,2)+1:end,3,k],Wlog[div(m,2)+1:end,1,k],"o",color="C0", markersize=1)
+        ind_p = (Ws[:,end,k] .>= 0.0)[:]
+        ind_m = (Ws[:,end,k] .< 0.0)[:]
+    plot3D(Wlog[ind_p,2,k],Wlog[ind_p,3,k],Wlog[ind_p,1,k],"o",color="C3", markersize=1)
+    plot3D(Wlog[ind_m,2,k],Wlog[ind_m,3,k],Wlog[ind_m,1,k],"o",color="C0", markersize=1)
 
     ax1.set_xlim3d(-1, 1)
     ax1.set_ylim3d(-1, 1)
